@@ -1,4 +1,6 @@
-﻿namespace GridLayoutLabTask2
+﻿using GridLayoutLabTask2.Views;
+
+namespace GridLayoutLabTask2
 {
     public partial class AppShell : Shell
     {

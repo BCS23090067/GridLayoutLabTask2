@@ -1,13 +1,16 @@
-﻿<ContentPage
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="GridLayoutLabTask2.MainPage"
+    xmlns:viewmodel="clr-namespace:GridLayoutLabTask2.ViewModels"
+    x:Class="GridLayoutLabTask2.Views.MainPage"
+    x:DataType="viewmodel:MainViewModel"
     BackgroundColor="White">
 
     <ScrollView>
         <VerticalStackLayout>
             <!-- Header -->
-            <Label 
+            <Label
                 Text="Your Name and ID here"
                 FontSize="20"
                 HorizontalOptions="Center"
@@ -22,7 +25,7 @@
                 CornerRadius="0"
                 Margin="0,0,0,10">
                 <Image
-                    Source="puppy.jpg"
+                    Source="{Binding Puppy.ImageSource}"
                     Aspect="AspectFill"
                     HeightRequest="220" />
             </Frame>
@@ -34,26 +37,31 @@
                 BackgroundColor="#FFF9E6">
                 <VerticalStackLayout Padding="15">
 
-                    <HorizontalStackLayout>
-                        <Label Text="Robin Hood"
-                               FontSize="22"
-                               FontAttributes="Bold"
-                               TextColor="Black" />
-                        <Label Text="♂"
-                               FontSize="20"
-                               Margin="5,0,0,0" />
-                    </HorizontalStackLayout>
+                    <Label 
+                        Text="{Binding Puppy.Name}"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        TextColor="Black" />
 
-                    <Label Text="Pug | 1 year old"
-                           FontSize="14"
-                           TextColor="#6E6E6E"
-                           Margin="0,2,0,5" />
+                    <Label 
+                        Text="{Binding Puppy.Breed, StringFormat='{0} | '}"
+                        FontSize="14"
+                        TextColor="#6E6E6E"
+                        Margin="0,2,0,5">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Puppy.Breed}" />
+                                <Span Text=" | " />
+                                <Span Text="{Binding Puppy.Age}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
                     <HorizontalStackLayout>
-                        <Image Source="location.png"
+                        <Image Source="{Binding Puppy.LocationIconSource}"
                                HeightRequest="16"
                                WidthRequest="16" />
-                        <Label Text="3B, Lorong 88, Taman Rantau Panjang, 96000 Sibu, Sarawak"
+                        <Label Text="{Binding Puppy.Location}"
                                FontSize="13"
                                TextColor="#6E6E6E"
                                LineBreakMode="WordWrap"
@@ -64,7 +72,7 @@
 
             <!-- Owner Info -->
             <HorizontalStackLayout Padding="20,0,20,0" Spacing="10">
-                <Image Source="owner.jpg"
+                <Image Source="{Binding Puppy.OwnerImageSource}"
                        HeightRequest="45"
                        WidthRequest="45"
                        Aspect="AspectFill">
@@ -73,15 +81,15 @@
                     </Image.Clip>
                 </Image>
                 <VerticalStackLayout>
-                    <Label Text="Jeon Jungkook"
+                    <Label Text="{Binding Puppy.OwnerName}"
                            FontAttributes="Bold"
                            FontSize="16"
                            TextColor="Black" />
-                    <Label Text="Owner"
+                    <Label Text="{Binding Puppy.OwnerTitle}"
                            FontSize="13"
                            TextColor="#6E6E6E" />
                 </VerticalStackLayout>
-                <Label Text="1.11.2024"
+                <Label Text="{Binding Puppy.DatePosted}"
                        FontSize="13"
                        TextColor="#6E6E6E"
                        HorizontalOptions="EndAndExpand"
@@ -89,7 +97,7 @@
             </HorizontalStackLayout>
 
             <!-- Description -->
-            <Label Text="Hi! Robin the Pug is simply a tiny tornado of fur, wrinkles, and endless charm!"
+            <Label Text="{Binding Puppy.Description}"
                    FontSize="14"
                    TextColor="Black"
                    Margin="20,10,20,10"
@@ -98,6 +106,7 @@
             <!-- Adoption Button -->
             <Button
                 Text="Adoption"
+                Command="{Binding AdoptPuppyCommand}"
                 BackgroundColor="#FFD34E"
                 TextColor="Black"
                 CornerRadius="20"
